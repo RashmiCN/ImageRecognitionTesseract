@@ -14,13 +14,16 @@ blackwhite.save("D:\Projects\OCRUsingTesseract\diarymilk\Rasgulla_BW.jpg")
 # In[92]:
 
 
-from tesserocr import PyTessBaseAPI
+from PIL import Image
+import pytesseract
 
-f = open("D:\Projects\OCRUsingTesseract\Rasgulla.txt","w+")
-with PyTessBaseAPI(path='D:/Projects/OCRUsingTesseract/tessdata-master/',lang='eng') as api:
-    api.SetImageFile('D:\Projects\OCRUsingTesseract\diarymilk\Rasgulla_BW.jpg')
-    f.write(api.GetUTF8Text())
+pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+im = Image.open('D:\Projects\OCRUsingTesseract\diarymilk\OreoIngredients.jpg')
+text = pytesseract.image_to_string(im,lang="eng").replace('\n','')
+f = open("D:\Projects\OCRUsingTesseract\OreoIngredients.txt","w+")
+f.write(text)
 f.close()
+print(text)
 
 
 # 
